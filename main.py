@@ -7,12 +7,14 @@ from pydantic import BaseModel
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 
+from get_bot_api_session import get_bot_api_session
+
 app = FastAPI()
-bot = Bot(environ.get('TOKEN'))
+bot = Bot(environ['TOKEN'], session=get_bot_api_session())
 
-auth = environ.get('AUTH')
+auth = environ['AUTH']
 
-chat_id = environ.get('CHAT_ID')
+chat_id = environ['CHAT_ID']
 thread_id = environ.get('THREAD_ID')
 
 if thread_id is not None:
